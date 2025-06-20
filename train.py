@@ -1,4 +1,5 @@
 # train.py
+import os
 import torch
 from torch.utils.data import DataLoader, Dataset
 import pytorch_lightning as pl
@@ -37,7 +38,9 @@ if __name__ == "__main__":
     trainer.fit(model, train_loader)
 
     # 4. Save the final model checkpoint
-    checkpoint_path = "model.ckpt"
+    pipeline_shared_path = os.getenv('PIPELINE_SHARED_PATH', "")
+    checkpoint_path = os.path.join(pipeline_shared_path, "model.ckpt") if pipeline_shared_path else "model.ckpt"
+
     trainer.save_checkpoint(checkpoint_path)
     
     print(f"\n--- Training Complete. Model saved to {checkpoint_path} ---")
