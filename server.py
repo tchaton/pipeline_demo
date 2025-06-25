@@ -37,7 +37,7 @@ if __name__ == "__main__":
     if not os.path.exists(checkpoint_path):
         print("Error: Could not find 'model.ckpt'.")
         print("Please run 'python train.py' first to train and save the model.")
-        exit()
+        exit(1)
         
     print("--- Starting LitServe server ---")
     api = SimpleLitAPI()
